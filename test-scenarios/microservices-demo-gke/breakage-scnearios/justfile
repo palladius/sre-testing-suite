@@ -1,0 +1,42 @@
+# Justfile for breakage scenarios
+
+# Lists targets, this should be ON TOP.
+list:
+    just -l
+
+install:
+    git clone https://github.com/GoogleCloudPlatform/microservices-demo.git
+
+clean:
+    rm -rf microservices-demo/
+
+break1:
+    @echo "Breaking scenario 1: Buggy Frontend Canary Rollout ."
+    @echo "Simulates a failed deployment or buggy update by rolling out a canary frontend."
+    ./breakage-scenario1.sh
+
+fix1:
+    kubectl delete deployment frontend-canary
+
+break2:
+    @echo "Breaking scenario 2: Blackhole traffic to cart checkout"
+    @echo "Simulates a network communication failure between frontend and checkout. "
+    ./breakage-scenario2.sh
+
+fix2:
+    kubectl delete networkpolicy update-checkout-from-frontend
+
+break3:
+    @echo "Blackhole traffic to entire GKE cluster at network level"
+    @echo "Simulates a blocked firewall rule"
+    ./breakage-scenario3.sh
+
+fix3:
+    gcloud compute firewall-rules delete "$RULE_NAME" --quiet
+
+break-them-all-smoothly:
+    just break1
+    sleep 900
+    just break2
+    sleep 100
+    just break3
