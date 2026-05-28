@@ -1,19 +1,19 @@
 #!/bin/bash
+./../breakage_log_line.sh "scenario2" "Buggy Frontend Canary Rollout. Note this only works for Autopilot bcs of Istio. We need different code for the STD one."
 
-./breakage_log_line.sh "scenario2" "Buggy Frontend Canary Rollout. Note this only works for Autopilot bcs of Istio. We need different code for the STD one."
 # 1. Clone or Update the Repository
 REPO_DIR="microservices-demo"
 if [ -d "$REPO_DIR" ]; then
     echo "Directory $REPO_DIR exists. Pulling latest changes..."
     cd "$REPO_DIR"
     git pull origin main
+    cd ..
 else
     echo "Cloning the Online Boutique repository..."
     git clone https://github.com/GoogleCloudPlatform/microservices-demo.git
-    cd "$REPO_DIR"
 fi
  
-# 2. Introducing a oncfiguration to canary release
+# 2. Introducing a configuration to canary release
 echo "📝 Deploying a canary frontend... "
 cat <<EOF > canary-frontend.yaml
 apiVersion: apps/v1
@@ -146,11 +146,6 @@ metadata:
   name: frontend
 EOF
 
-# 4. Apply the breakage
-echo " Applying the breakage."
+# 3. Apply the breakage
+echo " Applying the breakage..."
 kubectl apply -f canary-frontend.yaml
-
-# 5. Verification
-echo "🔍 Verifying the  frontend traffic is served by both frontend and frontend-canary"
-sleep 5
-kubectl get pods -l app=frontend

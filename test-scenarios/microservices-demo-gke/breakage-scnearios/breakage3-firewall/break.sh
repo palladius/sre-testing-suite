@@ -1,5 +1,5 @@
 #!/bin/bash
-./breakage_log_line.sh "Firewall update to block the traffic to gke cluster"
+./../breakage_log_line.sh "Firewall update to block the traffic to gke cluster"
 
 # 1. Configuration
 PROJECT_ID=$(gcloud config get-value project)
@@ -16,7 +16,7 @@ if [ -z "$NETWORK_NAME" ]; then
     exit 1
 fi
 
-./breakage_log_line.sh "scenario3" "Deny all frontend ingress via VPC firewall" "VPC: $NETWORK_NAME"
+./../breakage_log_line.sh "scenario3" "Deny all frontend ingress via VPC firewall" "VPC: $NETWORK_NAME"
 
 echo "Applying updated firewall rules to network: $NETWORK_NAME"
 
