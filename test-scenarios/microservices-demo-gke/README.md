@@ -1,67 +1,100 @@
-## Pre-requisites for testing these breakage scenarios
-### Deploy online-boutique application in the gcp project
-**Introducing the Failure:**
-To simulate the breakage scenarios, it is expected to have the online-boutique application running in a gke cluster ( autopilot or standard). Refer to the instructions https://github.com/GoogleCloudPlatform/microservices-demo repository for deploying the online-boutique application
+# GKE Microservices Demo - SRE Testing Scenarios
 
-**Set the Google Cloud project**
-Ensure you have the following requirements:
+This directory contains test scenarios designed to validate the **`sre-gemini-cli-extension`** using the [Google Cloud Microservices Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo) application deployed on Google Kubernetes Engine (GKE).
 
-    Google Cloud project.
-    Shell environment with gcloud, git, and kubectl.
+---
 
-## Breakage Scenarios and Fixes
+## Pre-requisites
 
-### Scenario 1: Buggy Frontend Canary Rollout
-**Introducing the Failure:**
-To simulate a failed deployment or a buggy update, execute the following script to roll out a canary version of the frontend (or use `make break2` or `just break2`):
+### 1. Deploy the Online Boutique Application
+Before running any of the breakage scenarios, you must have a running instance of the Online Boutique application inside a GKE cluster (either Autopilot or Standard). 
+Please follow the deployment instructions in the official [Microservices Demo Repository](https://github.com/GoogleCloudPlatform/microservices-demo).
 
+### 2. Environment Tools
+Ensure you have the following requirements met in your shell environment:
+- Active **Google Cloud project**.
+- Auth configured for `gcloud` and `kubectl`.
+- Local installation of `git`, `kubectl`, and [just](https://github.com/casey/just) command runner (recommended).
+
+---
+
+## Breakage Scenarios
+
+All breakage scenarios are organized into their own dedicated directories within [breakage-scnearios](./breakage-scnearios/) containing modular `break.sh`, `fix.sh`, `check.sh`, and `test.sh` scripts.
+
+To run these scenarios, navigate to the `breakage-scnearios/` directory:
 ```bash
-./breakage-scenario1.sh
+cd breakage-scnearios
 ```
 
-**Observation:**
-The Online Boutique homepage will fail to load intermittently. This happens because traffic is being load-balanced between the stable pods and the new frontend-canary pod containing the bug.
+### Scenario 1: Blackhole traffic to cart checkout
+* Simulates a network communication failure between the `frontend` and `checkout` service using a restrictive Kubernetes Network Policy.
 
-**Fixing the Failure:**
-Remove the buggy canary deployment to ensure all traffic is routed back to the stable version (or use `make fix2` or `just fix2`):
+* **Introducing the Failure:**
+  ```bash
+  just break1
+  # Or: cd breakage1-checkout && ./break.sh
+  ```
+* **Observation:** The checkout process will fail with a `500 Internal Server Error` in the browser.
+* **Fixing the Failure:**
+  ```bash
+  just fix1
+  # Or: cd breakage1-checkout && ./fix.sh
+  ```
 
-```bash
-kubectl delete deployment frontend-canary
-```
+---
 
-### Scenario 2: Blackhole traffic to cart checkout
-**Introducing the Failure:**
-To simulate a network communication failure between the frontend and the checkout service, run the following command (or use `make break1` or `just break1`):
+### Scenario 2: Buggy Frontend Canary Rollout
+* Simulates a failed canary rollout or a buggy update of the `frontend` service.
 
-```bash
-./breakage-scenario2.sh
-```
+* **Introducing the Failure:**
+  ```bash
+  just break2
+  # Or: cd breakage2-canary && ./break.sh
+  ```
+* **Observation:** The homepage will intermittently fail to load as traffic is load-balanced between stable pods and the buggy canary pod.
+* **Fixing the Failure:**
+  ```bash
+  just fix2
+  # Or: cd breakage2-canary && ./fix.sh
+  ```
 
-**Observation:**
-Test the cart checkout process in the browser. You should receive a `500 Internal Server Error` during the checkout phase because traffic is being dropped by a network policy.
-
-**Fixing the Failure:**
-Execute the command below to delete the restrictive network policy and restore traffic flow (or use `make fix1` or `just fix1`):
-
-```bash
-kubectl delete networkpolicy update-checkout-from-frontend
-```
-This will take few mins for the change to be effective
+---
 
 ### Scenario 3: Blackhole traffic to entire GKE cluster at network level
-**Introducing the Failure:**
-To simulate a failed deployment, execute the following script  (or use `make break3` or `just break3`):
+* Simulates an infrastructure-level network outage by blocking ingress traffic using a VPC firewall rule.
+
+* **Introducing the Failure:**
+  ```bash
+  just break3
+  # Or: cd breakage3-firewall && ./break.sh
+  ```
+* **Observation:** The Online Boutique homepage will completely timeout when attempting to load.
+* **Fixing the Failure:**
+  ```bash
+  just fix3
+  # Or: cd breakage3-firewall && ./fix.sh
+  ```
+
+---
+
+## Real-Time Monitoring
+
+You can run the GKE status monitor dashboard to view the live status of all scenarios:
 
 ```bash
-./breakage-scenario3.sh
+# Run monitor once
+just monitor-once
+
+# Start live dashboard (runs under watch)
+just monitor
 ```
 
-**Observation:**
-The Online Boutique homepage will timeout loading the page, as the traffic for gke cluster is completely blocked
+---
 
-**Fixing the Failure:**
-Remove the firewall rule applied to block traffic to GKE
+## Next Steps: Testing the SRE Extension
 
-```bash
-gcloud compute firewall-rules delete "$RULE_NAME" --quiet
-```
+Once a breakage scenario is active, you can use the investigation prompts to evaluate how the SRE Gemini extension helps detect, troubleshoot, and fix the issues.
+
+👉 See [Investigation Prompts Guide](./investigation-prompts/README.md) for full instructions and prompt templates.
+
