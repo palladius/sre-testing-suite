@@ -1,6 +1,6 @@
 # SRE Testing Suite 🪵
 
-This repository contains the test scenarios used for validating and testing the **`sre-gemini-cli-extension`** ([GitHub Repo](https://github.com/gemini-cli-extensions/sre)).
+This repository contains the test scenarios used for validating and testing the **`SRE Extension`** ([GitHub Repo](https://github.com/gemini-cli-extensions/sre)).
 
 These scenarios introduce modular chaos into deployments like the Microservices Online Boutique application to test the extension's detection, investigation, and mitigation capabilities.
 
