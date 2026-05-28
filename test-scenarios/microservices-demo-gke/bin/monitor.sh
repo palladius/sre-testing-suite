@@ -6,6 +6,11 @@ YELLOW="\033[1;33m"
 WHITE="\033[1;37m"
 RESET="\033[0m"
 
+# Resolve absolute paths relative to script location
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+BOUTIQUE_DIR="$SCRIPT_DIR/../microservices-demo"
+SCENARIOS_DIR="$SCRIPT_DIR/../breakage-scnearios"
+
 PROJECT_ID=$(gcloud config get-value project 2>/dev/null)
 GCLOUD_EMAIL=$(gcloud config get-value account 2>/dev/null)
 CLUSTER_NAME=$(kubectl config view --minify -o jsonpath='{.contexts[0].context.cluster}' 2>/dev/null | cut -d'_' -f4)
@@ -20,7 +25,8 @@ echo -e " ${WHITE}Identity:${RESET}      ${YELLOW}${GCLOUD_EMAIL}${RESET}"
 echo -e " ${WHITE}Cluster Name:${RESET}  ${YELLOW}${CLUSTER_NAME}${RESET}"
 echo -e " ${WHITE}Target IP:${RESET}     ${YELLOW}${TARGET_IP}${RESET}"
 echo -e " ${WHITE}Timestamp:${RESET}     ${CYAN}$(date '+%Y-%m-%d %H:%M:%S')${RESET}"
-if [ -d "../microservices-demo" ]; then
+
+if [ -d "$BOUTIQUE_DIR" ]; then
     echo -e " ${WHITE}Code Repo:${RESET}     📁 ${YELLOW}Downloaded Online Boutique under test-scenarios/microservices-demo-gke/microservices-demo/${RESET}"
 else
     echo -e " ${WHITE}Code Repo:${RESET}     ⚠️  ${YELLOW}Missing local Online Boutique checkout (Run 'just clone-repo' to download)${RESET}"
@@ -29,17 +35,16 @@ fi
 echo -e "${WHITE}================================================${RESET}"
 
 # Execute the 3 checks and filter just the colored status lines
-if [ -f "breakage1-checkout/check.sh" ]; then
-  bash breakage1-checkout/check.sh | grep -E "🟢|🔴"
+if [ -f "$SCENARIOS_DIR/breakage1-checkout/check.sh" ]; then
+  bash "$SCENARIOS_DIR/breakage1-checkout/check.sh" | grep -E "🟢|🔴"
 fi
 
-if [ -f "breakage2-canary/check.sh" ]; then
-  bash breakage2-canary/check.sh | grep -E "🟢|🔴"
+if [ -f "$SCENARIOS_DIR/breakage2-canary/check.sh" ]; then
+  bash "$SCENARIOS_DIR/breakage2-canary/check.sh" | grep -E "🟢|🔴"
 fi
 
-if [ -f "breakage3-firewall/check.sh" ]; then
-  bash breakage3-firewall/check.sh | grep -E "🟢|🔴"
+if [ -f "$SCENARIOS_DIR/breakage3-firewall/check.sh" ]; then
+  bash "$SCENARIOS_DIR/breakage3-firewall/check.sh" | grep -E "🟢|🔴"
 fi
-
 
 echo -e "${WHITE}================================================${RESET}"

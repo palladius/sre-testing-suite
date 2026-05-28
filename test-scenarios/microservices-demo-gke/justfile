@@ -21,11 +21,11 @@ clean:
 
 # Run the GKE Brokenness Monitor once
 monitor-once:
-    @cd breakage-scnearios && bash monitor.sh
+    @bash bin/monitor.sh
 
 # Real-time GKE Brokenness Monitor dashboard (wrapped in watch)
 monitor-watch:
-    @watch -n 2 -c "cd breakage-scnearios && bash monitor.sh" || while true; do clear; cd breakage-scnearios && bash monitor.sh; sleep 2; done
+    @watch -n 2 -c "bash bin/monitor.sh" || while true; do clear; bash bin/monitor.sh; sleep 2; done
 
 monitor: monitor-watch
 

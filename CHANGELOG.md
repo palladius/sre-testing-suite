@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 ## [0.0.2] - 2026-05-28 (Ricardo)
 
 ### Added
-- Created a centralized GKE monitor dashboard (`monitor.sh`) that dynamically checks and warns about missing/present repository checkouts.
+- Created a centralized GKE monitor dashboard (`monitor.sh`) that dynamically checks and warns about missing/present repository checkouts. Relocated it under `bin/` at GKE root level.
 - Centralized GKE root `justfile` allowing clean, global task executions directly from `test-scenarios/microservices-demo-gke/`.
 - Dynamic path resolution using absolute script locations (`SCRIPT_DIR`) to robustly target a single, shared `microservices-demo/` directory.
 

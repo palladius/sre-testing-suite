@@ -82,6 +82,7 @@ You can run the GKE status monitor dashboard to view the live status of all scen
 ```bash
 # Run monitor once
 just monitor-once
+# Or directly: bash bin/monitor.sh
 
 # Start live dashboard (runs under watch)
 just monitor

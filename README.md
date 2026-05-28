@@ -16,6 +16,8 @@ sre-testing-suite/
     └── microservices-demo-gke/         # Breakage scenarios for Online Boutique on GKE
         ├── README.md                   # Overview & prerequisites for GKE testing
         ├── justfile                    # Just runner to easily break, fix, and monitor
+        ├── bin/                        # Relocated set up and monitor scripts
+        │   └── monitor.sh              # Real-time brokenness monitor script
         ├── investigation-prompts/      # Test prompts to evaluate the SRE extension
         │   ├── README.md               # Details on using investigation prompts
         │   ├── 00-setup.md             # Initial MCP servers setup instructions
@@ -24,7 +26,6 @@ sre-testing-suite/
         │   └── 03-generate-graph.md    # Prompts to generate incident graphs
         └── breakage-scnearios/         # Modular chaos scenarios
             ├── README.md               # Detailed scenario guide and manual fixes
-            ├── monitor.sh              # Real-time brokenness monitor script
             ├── breakage1-checkout/     # Scenario 1: Blackhole traffic to checkout (`just break1`)
             │   ├── break.sh
             │   ├── fix.sh
