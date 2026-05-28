@@ -38,6 +38,8 @@ sre-testing-suite/
 
 ## Running Scenarios
 
+## 01 GKE (Microservices Demo)
+
 You can navigate to the `test-scenarios/microservices-demo-gke/` directory and use the `just` runner to trigger and fix issues:
 
 - **Break Scenario 1 (Cart Checkout Block):** `just break1`
