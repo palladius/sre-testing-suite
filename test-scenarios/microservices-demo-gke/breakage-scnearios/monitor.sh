@@ -7,6 +7,7 @@ WHITE="\033[1;37m"
 RESET="\033[0m"
 
 PROJECT_ID=$(gcloud config get-value project 2>/dev/null)
+GCLOUD_EMAIL=$(gcloud config get-value account 2>/dev/null)
 CLUSTER_NAME=$(kubectl config view --minify -o jsonpath='{.contexts[0].context.cluster}' 2>/dev/null | cut -d'_' -f4)
 CLUSTER_NAME=${CLUSTER_NAME:-"online-boutique-prod"}
 TARGET_IP=$(kubectl get service frontend-external -o jsonpath='{.status.loadBalancer.ingress[0].ip}' 2>/dev/null)
@@ -15,6 +16,7 @@ TARGET_IP=${TARGET_IP:-"34.55.56.97"}
 echo -e "${WHITE}================================================${RESET}"
 echo -e "${CYAN}   🚨 GKE Brokenness Scenario Monitor 🚨${RESET}"
 echo -e " ${WHITE}Project ID:${RESET}    ${YELLOW}${PROJECT_ID}${RESET}"
+echo -e " ${WHITE}Identity:${RESET}      ${YELLOW}${GCLOUD_EMAIL}${RESET}"
 echo -e " ${WHITE}Cluster Name:${RESET}  ${YELLOW}${CLUSTER_NAME}${RESET}"
 echo -e " ${WHITE}Target IP:${RESET}     ${YELLOW}${TARGET_IP}${RESET}"
 echo -e " ${WHITE}Timestamp:${RESET}     ${CYAN}$(date '+%Y-%m-%d %H:%M:%S')${RESET}"
