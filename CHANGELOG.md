@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.3] - 2026-05-28 (Gemini)
+
+### Changed
+- Improved Scenario 2 (`breakage2-canary`) check and test scripts to verify if the active canary contains the buggy configuration (`PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservices:3550`) rather than just checking if the `frontend-canary` deployment exists. This ensures that any corrected/healthy canary deployment is accurately reported as healthy.
+
 ---
 
 ## [0.0.3] - 2026-06-05 (Riccardo)
