@@ -14,10 +14,11 @@ TARGET_IP=${TARGET_IP:-"34.55.56.97"}
 
 echo -e "${WHITE}================================================${RESET}"
 echo -e "${CYAN}   🚨 GKE Brokenness Scenario Monitor 🚨${RESET}"
-echo -e " ${WHITE}Project ID:${RESET}  ${YELLOW}${PROJECT_ID}${RESET}"
-echo -e " ${WHITE}Cluster Name:${RESET} ${YELLOW}${CLUSTER_NAME}${RESET}"
-echo -e " ${WHITE}Target IP:${RESET}    ${YELLOW}${TARGET_IP}${RESET}"
-echo -e " ${WHITE}Timestamp:${RESET}    ${CYAN}$(date '+%Y-%m-%d %H:%M:%S')${RESET}"
+echo -e " ${WHITE}Project ID:${RESET}    ${YELLOW}${PROJECT_ID}${RESET}"
+echo -e " ${WHITE}Cluster Name:${RESET}  ${YELLOW}${CLUSTER_NAME}${RESET}"
+echo -e " ${WHITE}Target IP:${RESET}     ${YELLOW}${TARGET_IP}${RESET}"
+echo -e " ${WHITE}Timestamp:${RESET}     ${CYAN}$(date '+%Y-%m-%d %H:%M:%S')${RESET}"
+
 echo -e "${WHITE}================================================${RESET}"
 
 # Execute the 3 checks and filter just the colored status lines

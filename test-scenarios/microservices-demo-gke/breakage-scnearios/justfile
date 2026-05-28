@@ -15,8 +15,10 @@ monitor-once:
     @bash monitor.sh
 
 # Real-time GKE Brokenness Monitor dashboard (wrapped in watch)
-monitor123:
+monitor-watch:
     @watch -n 2 -c "bash monitor.sh" || while true; do clear; bash monitor.sh; sleep 2; done
+
+monitor: monitor-watch
 
 # --- Scenario 1: Blackhole Checkout ---
 break1:
