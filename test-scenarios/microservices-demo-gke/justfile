@@ -5,11 +5,11 @@ list:
     just -l
 
 clone-repo:
-    #!/bin/bash
-    @if [ ! -d "microservices-demo" ]; then \
-        git clone https://github.com/GoogleCloudPlatform/microservices-demo.git; \
-    else \
-        echo "Repository already exists."; \
+    #!/usr/bin/env bash
+    if [ ! -d "microservices-demo" ]; then
+        git clone https://github.com/GoogleCloudPlatform/microservices-demo.git
+    else
+        echo "Repository already exists."
     fi
 
 install: clone-repo
