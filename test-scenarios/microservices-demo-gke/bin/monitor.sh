@@ -27,7 +27,8 @@ echo -e " ${WHITE}Target IP:${RESET}     ${YELLOW}${TARGET_IP}${RESET}"
 echo -e " ${WHITE}Timestamp:${RESET}     ${CYAN}$(date '+%Y-%m-%d %H:%M:%S')${RESET}"
 
 if [ -d "$BOUTIQUE_DIR" ]; then
-    echo -e " ${WHITE}Code Repo:${RESET}     📁 ${YELLOW}Downloaded Online Boutique under test-scenarios/microservices-demo-gke/microservices-demo/${RESET}"
+    ABS_BOUTIQUE_DIR=$(cd "$BOUTIQUE_DIR" && pwd)
+    echo -e " ${WHITE}Code Repo:${RESET}     📁 ${YELLOW}Downloaded Online Boutique under ${ABS_BOUTIQUE_DIR}/${RESET}"
 else
     echo -e " ${WHITE}Code Repo:${RESET}     ⚠️  ${YELLOW}Missing local Online Boutique checkout (Run 'just clone-repo' to download)${RESET}"
 fi
