@@ -25,5 +25,5 @@ If timeline is BAD like this:
 -->
 Your timestamps don't convince me. Please find the exact point in logs/monitoring where things have happened. 
 If a timestamp ends with :00 it's fishy.
-I want real timestanos!
+I want real timestanos from logging or monitoring data!
 ```
