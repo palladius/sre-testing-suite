@@ -22,15 +22,16 @@ echo -e "${WHITE}================================================${RESET}"
 
 # Execute the 3 checks and filter just the colored status lines
 if [ -f "breakage1-checkout/check.sh" ]; then
-  ./breakage1-checkout/check.sh | grep -E "🟢|🔴"
+  bash breakage1-checkout/check.sh | grep -E "🟢|🔴"
 fi
 
 if [ -f "breakage2-canary/check.sh" ]; then
-  ./breakage2-canary/check.sh | grep -E "🟢|🔴"
+  bash breakage2-canary/check.sh | grep -E "🟢|🔴"
 fi
 
 if [ -f "breakage3-firewall/check.sh" ]; then
-  ./breakage3-firewall/check.sh | grep -E "🟢|🔴"
+  bash breakage3-firewall/check.sh | grep -E "🟢|🔴"
 fi
+
 
 echo -e "${WHITE}================================================${RESET}"
