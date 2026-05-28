@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [0.0.2] - 2026-05-28
+## [0.0.2] - 2026-05-28 (Ricardo)
+
 ### Added
 - Created a centralized GKE monitor dashboard (`monitor.sh`) that dynamically checks and warns about missing/present repository checkouts.
 - Centralized GKE root `justfile` allowing clean, global task executions directly from `test-scenarios/microservices-demo-gke/`.
@@ -30,7 +31,8 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [0.0.1] - 2026-05-11
+## [0.0.1] - 2026-05-11 (Madhavi)
+
 ### Added
 - Initial commit for microservices-demo-gke test scenarios.
 - Integrated the GKE cluster test scenarios with the Online Boutique application.
