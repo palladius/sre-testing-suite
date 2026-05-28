@@ -10,10 +10,16 @@ install:
 clean:
     rm -rf microservices-demo/
 
-# Real-time GKE Brokenness Monitor dashboard
+# Run the GKE Brokenness Monitor once
+monitor-once:
+    @chmod +x monitor.sh
+    @./monitor.sh
+
+# Real-time GKE Brokenness Monitor dashboard (wrapped in watch)
 monitor123:
     @chmod +x monitor.sh
     @watch -n 2 -c ./monitor.sh || while true; do clear; ./monitor.sh; sleep 2; done
+
 
 
 # --- Scenario 1: Blackhole Checkout ---
