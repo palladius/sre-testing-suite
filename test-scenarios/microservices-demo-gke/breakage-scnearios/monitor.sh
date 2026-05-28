@@ -18,6 +18,11 @@ echo -e " ${WHITE}Project ID:${RESET}    ${YELLOW}${PROJECT_ID}${RESET}"
 echo -e " ${WHITE}Cluster Name:${RESET}  ${YELLOW}${CLUSTER_NAME}${RESET}"
 echo -e " ${WHITE}Target IP:${RESET}     ${YELLOW}${TARGET_IP}${RESET}"
 echo -e " ${WHITE}Timestamp:${RESET}     ${CYAN}$(date '+%Y-%m-%d %H:%M:%S')${RESET}"
+if [ -d "../microservices-demo" ]; then
+    echo -e " ${WHITE}Code Repo:${RESET}     📁 ${YELLOW}Downloaded Online Boutique under test-scenarios/microservices-demo-gke/microservices-demo/${RESET}"
+else
+    echo -e " ${WHITE}Code Repo:${RESET}     ⚠️  ${YELLOW}Missing local Online Boutique checkout (Run 'just clone-repo' to download)${RESET}"
+fi
 
 echo -e "${WHITE}================================================${RESET}"
 

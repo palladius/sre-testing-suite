@@ -22,10 +22,7 @@ Ensure you have the following requirements met in your shell environment:
 
 All breakage scenarios are organized into their own dedicated directories within [breakage-scnearios](./breakage-scnearios/) containing modular `break.sh`, `fix.sh`, `check.sh`, and `test.sh` scripts.
 
-To run these scenarios, navigate to the `breakage-scnearios/` directory:
-```bash
-cd breakage-scnearios
-```
+You can use the `just` runner directly from this directory to orchestrate scenarios, or run the modular scripts manually from within the `breakage-scnearios/` subdirectories:
 
 ### Scenario 1: Blackhole traffic to cart checkout
 * Simulates a network communication failure between the `frontend` and `checkout` service using a restrictive Kubernetes Network Policy.
@@ -33,13 +30,13 @@ cd breakage-scnearios
 * **Introducing the Failure:**
   ```bash
   just break1
-  # Or: cd breakage1-checkout && ./break.sh
+  # Or: cd breakage-scnearios/breakage1-checkout && ./break.sh
   ```
 * **Observation:** The checkout process will fail with a `500 Internal Server Error` in the browser.
 * **Fixing the Failure:**
   ```bash
   just fix1
-  # Or: cd breakage1-checkout && ./fix.sh
+  # Or: cd breakage-scnearios/breakage1-checkout && ./fix.sh
   ```
 
 ---
@@ -50,13 +47,13 @@ cd breakage-scnearios
 * **Introducing the Failure:**
   ```bash
   just break2
-  # Or: cd breakage2-canary && ./break.sh
+  # Or: cd breakage-scnearios/breakage2-canary && ./break.sh
   ```
 * **Observation:** The homepage will intermittently fail to load as traffic is load-balanced between stable pods and the buggy canary pod.
 * **Fixing the Failure:**
   ```bash
   just fix2
-  # Or: cd breakage2-canary && ./fix.sh
+  # Or: cd breakage-scnearios/breakage2-canary && ./fix.sh
   ```
 
 ---
@@ -67,13 +64,13 @@ cd breakage-scnearios
 * **Introducing the Failure:**
   ```bash
   just break3
-  # Or: cd breakage3-firewall && ./break.sh
+  # Or: cd breakage-scnearios/breakage3-firewall && ./break.sh
   ```
 * **Observation:** The Online Boutique homepage will completely timeout when attempting to load.
 * **Fixing the Failure:**
   ```bash
   just fix3
-  # Or: cd breakage3-firewall && ./fix.sh
+  # Or: cd breakage-scnearios/breakage3-firewall && ./fix.sh
   ```
 
 ---

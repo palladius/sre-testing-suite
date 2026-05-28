@@ -15,6 +15,7 @@ sre-testing-suite/
 └── test-scenarios/                     # Test scenarios categorized by platform/app
     └── microservices-demo-gke/         # Breakage scenarios for Online Boutique on GKE
         ├── README.md                   # Overview & prerequisites for GKE testing
+        ├── justfile                    # Just runner to easily break, fix, and monitor
         ├── investigation-prompts/      # Test prompts to evaluate the SRE extension
         │   ├── README.md               # Details on using investigation prompts
         │   ├── 00-setup.md             # Initial MCP servers setup instructions
@@ -23,7 +24,6 @@ sre-testing-suite/
         │   └── 03-generate-graph.md    # Prompts to generate incident graphs
         └── breakage-scnearios/         # Modular chaos scenarios
             ├── README.md               # Detailed scenario guide and manual fixes
-            ├── justfile                # Just runner to easily break, fix, and monitor
             ├── monitor.sh              # Real-time brokenness monitor script
             ├── breakage1-checkout/     # Scenario 1: Blackhole traffic to checkout (`just break1`)
             │   ├── break.sh
@@ -38,7 +38,7 @@ sre-testing-suite/
 
 ## Running Scenarios
 
-Each test scenario is isolated under `test-scenarios/microservices-demo-gke/breakage-scnearios/`. You can navigate to that directory and use the `just` runner to trigger and fix issues:
+You can navigate to the `test-scenarios/microservices-demo-gke/` directory and use the `just` runner to trigger and fix issues:
 
 - **Break Scenario 1 (Cart Checkout Block):** `just break1`
 - **Fix Scenario 1:** `just fix1`

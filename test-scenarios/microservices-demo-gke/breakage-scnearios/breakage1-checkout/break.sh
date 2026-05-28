@@ -1,18 +1,14 @@
 #!/bin/bash
 ./../breakage_log_line.sh "scenario1-PROD standard" "Blackhole traffic to cart checkout. This is for standard gke cluster."
 
-# 1. Clone or Update the Repository
-REPO_DIR="microservices-demo"
-
-if [ -d "$REPO_DIR" ]; then
-    echo "Directory $REPO_DIR exists. Pulling latest changes..."
-    cd "$REPO_DIR"
-    git pull origin main
-    cd ..
-else
-    echo "Cloning the Online Boutique repository..."
-    git clone https://github.com/GoogleCloudPlatform/microservices-demo.git
+# 1. Ensure the Online Boutique Repository is Cloned in the consistent parent directory
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+PARENT_REPO_DIR="$SCRIPT_DIR/../../microservices-demo"
+if [ ! -d "$PARENT_REPO_DIR" ]; then
+    echo "Cloning the Online Boutique repository via root justfile..."
+    (cd "$SCRIPT_DIR/../.." && just clone-repo)
 fi
+
  
 # 2. Create the "Black Hole" NetworkPolicy
 echo "📝 Creating the NetworkPolicy manifest..."
