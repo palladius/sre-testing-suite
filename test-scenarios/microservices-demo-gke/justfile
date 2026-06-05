@@ -1,5 +1,8 @@
 # Justfile for GKE breakage scenarios
 
+default:
+    just -l
+
 # Lists targets, this should be ON TOP.
 list:
     just -l
@@ -16,8 +19,8 @@ install: clone-repo
 
 clean:
     rm -rf microservices-demo/
-    rm -rf breakage-scnearios/breakage1-checkout/microservices-demo/
-    rm -rf breakage-scnearios/breakage2-canary/microservices-demo/
+    rm -rf breakage-scenarios/breakage1-checkout/microservices-demo/
+    rm -rf breakage-scenarios/breakage2-canary/microservices-demo/
 
 # Run the GKE Brokenness Monitor once
 monitor-once:
@@ -32,53 +35,53 @@ monitor: monitor-watch
 # --- Scenario 1: Blackhole Checkout ---
 break1:
     @echo "🚨 Introducing Scenario 1: Blackhole traffic to cart checkout"
-    cd breakage-scnearios/breakage1-checkout && bash break.sh
+    cd breakage-scenarios/breakage1-checkout && bash break.sh
 
 fix1:
     @echo "🔧 Fixing Scenario 1: Restoring checkout traffic"
-    cd breakage-scnearios/breakage1-checkout && bash fix.sh
+    cd breakage-scenarios/breakage1-checkout && bash fix.sh
 
 check1:
     @echo "🔍 Checking Scenario 1 status..."
-    cd breakage-scnearios/breakage1-checkout && bash check.sh
+    cd breakage-scenarios/breakage1-checkout && bash check.sh
 
 test1:
     @echo "🔍 Continually pinging Scenario 1 status (Ctrl+C to stop)..."
-    cd breakage-scnearios/breakage1-checkout && bash test.sh
+    cd breakage-scenarios/breakage1-checkout && bash test.sh
 
 # --- Scenario 2: Buggy Canary Rollout ---
 break2:
     @echo "🚨 Introducing Scenario 2: Buggy Frontend Canary Rollout"
-    cd breakage-scnearios/breakage2-canary && bash break.sh
+    cd breakage-scenarios/breakage2-canary && bash break.sh
 
 fix2:
     @echo "🔧 Fixing Scenario 2: Removing buggy canary deployment"
-    cd breakage-scnearios/breakage2-canary && bash fix.sh
+    cd breakage-scenarios/breakage2-canary && bash fix.sh
 
 check2:
     @echo "🔍 Checking Scenario 2 status..."
-    cd breakage-scnearios/breakage2-canary && bash check.sh
+    cd breakage-scenarios/breakage2-canary && bash check.sh
 
 test2:
     @echo "🔍 Continually pinging Scenario 2 status (Ctrl+C to stop)..."
-    cd breakage-scnearios/breakage2-canary && bash test.sh
+    cd breakage-scenarios/breakage2-canary && bash test.sh
 
 # --- Scenario 3: VPC Firewall Block ---
 break3:
     @echo "🚨 Introducing Scenario 3: VPC Firewall blocking frontend"
-    cd breakage-scnearios/breakage3-firewall && bash break.sh
+    cd breakage-scenarios/breakage3-firewall && bash break.sh
 
 fix3:
     @echo "🔧 Fixing Scenario 3: Removing blocking firewall rule"
-    cd breakage-scnearios/breakage3-firewall && bash fix.sh
+    cd breakage-scenarios/breakage3-firewall && bash fix.sh
 
 check3:
     @echo "🔍 Checking Scenario 3 status..."
-    cd breakage-scnearios/breakage3-firewall && bash check.sh
+    cd breakage-scenarios/breakage3-firewall && bash check.sh
 
 test3:
     @echo "🔍 Continually pinging Scenario 3 status (Ctrl+C to stop)..."
-    cd breakage-scnearios/breakage3-firewall && bash test.sh
+    cd breakage-scenarios/breakage3-firewall && bash test.sh
 
 # --- Disaster Scenario ---
 break-them-all-smoothly:

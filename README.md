@@ -24,7 +24,7 @@ sre-testing-suite/
         │   ├── 01-start-investigation.md # Prompts to start investigations
         │   ├── 02-generate-postmortem.md # Prompts to generate incident postmortems
         │   └── 03-generate-graph.md    # Prompts to generate incident graphs
-        └── breakage-scnearios/         # Modular chaos scenarios
+        └── breakage-scenarios/         # Modular chaos scenarios
             ├── README.md               # Detailed scenario guide and manual fixes
             ├── breakage1-checkout/     # Scenario 1: Blackhole traffic to checkout (`just break1`)
             │   ├── break.sh

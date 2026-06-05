@@ -9,7 +9,7 @@ RESET="\033[0m"
 # Resolve absolute paths relative to script location
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 BOUTIQUE_DIR="$SCRIPT_DIR/../microservices-demo"
-SCENARIOS_DIR="$SCRIPT_DIR/../breakage-scnearios"
+SCENARIOS_DIR="$SCRIPT_DIR/../breakage-scenarios"
 
 PROJECT_ID=$(gcloud config get-value project 2>/dev/null)
 GCLOUD_EMAIL=$(gcloud config get-value account 2>/dev/null)
