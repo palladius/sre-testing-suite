@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [0.0.3] - 2026-06-05 (Riccardo)
+
+### Added
+- Created `breakage_log_line.sh` script to log breakage events locally to `breakage.log` and asynchronously to GCP Cloud Logging.
+
+### Changed
+- Renamed folder `breakage-scnearios` to `breakage-scenarios` to correct spelling.
+- Updated all references in scripts, `README.md`, and `justfile` to use the correct `breakage-scenarios` spelling.
+
+---
+
+
 ## [0.0.2] - 2026-05-28 (Ricardo)
 
 ### Added
