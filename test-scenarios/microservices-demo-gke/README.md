@@ -10,6 +10,16 @@ This directory contains test scenarios designed to validate the **`sre-gemini-cl
 Before running any of the breakage scenarios, you must have a running instance of the Online Boutique application inside a GKE cluster (either Autopilot or Standard). 
 Please follow the deployment instructions in the official [Microservices Demo Repository](https://github.com/GoogleCloudPlatform/microservices-demo).
 
+> [!NOTE]
+> **Corporate Org Policy / LoadBalancer Restriction Workaround:**
+> If your cluster is created in a GCP project where the constraint `constraints/compute.restrictLoadBalancerCreationForTypes` is active (common in corporate/google.com environments), GKE will fail to provision an external LoadBalancer IP for the `frontend-external` service (status will remain `<pending>`).
+> 
+> To access the Boutique locally in this case, establish a local port-forward:
+> ```bash
+> kubectl port-forward service/frontend 8080:80
+> ```
+> You can then access the application at **`http://localhost:8080`**.
+
 ### 2. Environment Tools
 Ensure you have the following requirements met in your shell environment:
 - Active **Google Cloud project**.
