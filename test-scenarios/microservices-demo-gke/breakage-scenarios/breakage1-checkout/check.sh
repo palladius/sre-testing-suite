@@ -3,7 +3,7 @@ echo "🔍 Checking Scenario 1 once (via simulated checkout request)..."
 
 # Resolve target endpoint
 TARGET_IP=$(kubectl get service frontend-external -o jsonpath='{.status.loadBalancer.ingress[0].ip}' 2>/dev/null)
-TARGET_IP=${TARGET_IP:-"34.55.56.97"}
+TARGET_IP=${TARGET_IP:-"127.0.0.1:8080"}
 
 COOKIE_FILE=$(mktemp)
 # 1. Initialize session
