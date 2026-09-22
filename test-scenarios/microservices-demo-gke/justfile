@@ -7,15 +7,15 @@ default:
 list:
     just -l
 
-clone-repo:
-    #!/usr/bin/env bash
-    if [ ! -d "microservices-demo" ]; then
-        git clone https://github.com/GoogleCloudPlatform/microservices-demo.git
-    else
-        echo "Repository already exists."
-    fi
+# Deploy GKE Autopilot cluster & Online Boutique via embedded Terraform (zero sed hacks)
+deploy:
+    cd terraform && terraform init && terraform apply -var="gcp_project_id=${GOOGLE_CLOUD_PROJECT}"
 
-install: clone-repo
+# Destroy GKE Autopilot cluster & Online Boutique via embedded Terraform
+destroy:
+    cd terraform && terraform destroy -var="gcp_project_id=${GOOGLE_CLOUD_PROJECT}"
+
+install: deploy
 
 clean:
     rm -rf microservices-demo/

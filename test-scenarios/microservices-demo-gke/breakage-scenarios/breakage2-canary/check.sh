@@ -5,7 +5,11 @@ CANARY_EXISTS=$(kubectl get deployment frontend-canary -n default --ignore-not-f
 if [ -n "$CANARY_EXISTS" ]; then
   # Check if the deployment is buggy
   BUGGY_VAL=$(kubectl get deployment frontend-canary -n default -o jsonpath='{.spec.template.spec.containers[0].env[?(@.name=="PRODUCT_CATALOG_SERVICE_ADDR")].value}' 2>/dev/null)
+<<<<<<< HEAD
   if [ "$BUGGY_VAL" != "productcatalogservice:3550" ]; then
+=======
+  if [ "$BUGGY_VAL" = "productcatalogservices:3550" ]; then
+>>>>>>> origin/main
     echo "🔴 [scenario2] DEPLOYED: Buggy frontend canary rollout is active!"
   else
     echo "🟢 [scenario2] HEALTHY: Canary is active and running on a corrected release."

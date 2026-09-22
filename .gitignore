@@ -1,2 +1,8 @@
 .DS_Store
 **/microservices-demo/
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
+**/*.log
+**/*.png
+**/postmortem.md

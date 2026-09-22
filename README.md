@@ -4,6 +4,8 @@ This repository contains the test scenarios used for validating and testing the 
 
 These scenarios introduce modular chaos into deployments like the Microservices Online Boutique application to test the extension's detection, investigation, and mitigation capabilities.
 
+* Want to try this at home?  Use this repo in conjuction with this great Codelab! https://codelabs.developers.google.com/codelabs/investigate-gke-cluster-breakage-scenarios-with-postmortem#0
+
 ## Repository Structure
 
 The current layout of the repository is structured as follows:
