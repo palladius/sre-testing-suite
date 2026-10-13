@@ -6,3 +6,7 @@
 **/*.log
 **/*.png
 **/postmortem.md
+!test-scenarios/microservices-demo-gke/investigation/postmortem.md
+!test-scenarios/microservices-demo-gke/investigation/microservices-demo
+!test-scenarios/microservices-demo-gke/investigation/kustomize
+

@@ -11,11 +11,26 @@ list:
 deploy:
     cd terraform && terraform init && terraform apply -var="gcp_project_id=${GOOGLE_CLOUD_PROJECT}"
 
+clone-repo:
+    #!/usr/bin/env bash
+    if [ ! -d "microservices-demo" ]; then
+        git clone https://github.com/GoogleCloudPlatform/microservices-demo.git
+    else
+        echo "Repository already exists."
+    fi
+    ln -sfn ../microservices-demo investigation/microservices-demo
+    ln -sfn ../kustomize investigation/kustomize
+
 # Destroy GKE Autopilot cluster & Online Boutique via embedded Terraform
 destroy:
     cd terraform && terraform destroy -var="gcp_project_id=${GOOGLE_CLOUD_PROJECT}"
 
 install: deploy
+
+# Enter or display the spoiler-free investigation/ Root Cage folder
+investigate:
+    @echo "🕵️‍♂️ Start your AI agent (agy / gemini) inside the spoiler-free Root Cage:"
+    @echo "  cd $(pwd)/investigation && agy"
 
 clean:
     rm -rf microservices-demo/

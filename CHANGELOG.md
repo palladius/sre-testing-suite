@@ -9,6 +9,18 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [0.0.4] - 2026-10-13 (Riccardo)
+
+### Added
+- Created `test-scenarios/microservices-demo-gke/investigation/` ("The Root Cage" / SRE War Room) as the dedicated entrypoint for AI SRE agents (`agy`, `gemini`, `claude`):
+  - `investigation/GEMINI.md` (and `AGENTS.md -> GEMINI.md` symlink): Didactic anti-cheating guardrail that grants full visibility into `./microservices-demo/` while forbidding traversal into `../breakage-scenarios/`.
+  - `investigation/microservices-demo -> ../microservices-demo`: Relative symlink so the student and agent have full visibility into the Online Boutique manifests, source code, and architecture diagram without exposing `../breakage-scenarios/`.
+  - `investigation/postmortem.md`: Starter blameless SRE Postmortem template beginning with `<!-- substitute this with the real postmortem -->` so Qwiklabs (`CE529`) can programmatically check whether the postmortem has been completed.
+  - `investigation/README.md`: Documentation for the War Room and Qwiklabs CE529 dependency contract.
+- Added `just investigate` helper target in `test-scenarios/microservices-demo-gke/justfile` and updated `GEMINI.md` with the Qwiklabs CE529 dependency section.
+
+---
+
 ## [0.0.3] - 2026-06-05 (Riccardo)
 
 ### Added
