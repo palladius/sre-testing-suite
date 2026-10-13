@@ -10,7 +10,7 @@ the bug is in the checkout but I dont want to give it a way so simply ;)
 
 ```markdown
 
-/sre-extension:investigation-entrypoint Help!!! Users are complaining they are unable to purchase a product from online boutique application (I believe its "http://1.2.3.4" but I might be wrong)
+/sre-extension:investigation-entrypoint Help!!! Users are complaining they are unable to purchase a product from online boutique application (I believe its "http://localhost:8080" but I might be wrong)
 
 Start an investigation using the `investigation-entrypoint` skill and document what you do with timestamps: we'll need them later for a PostMortem.
 

@@ -7,6 +7,10 @@ default:
 list:
     just -l
 
+# Deploy GKE Autopilot cluster & Online Boutique via embedded Terraform (zero sed hacks)
+deploy:
+    cd terraform && terraform init && terraform apply -var="gcp_project_id=${GOOGLE_CLOUD_PROJECT}"
+
 clone-repo:
     #!/usr/bin/env bash
     if [ ! -d "microservices-demo" ]; then
@@ -15,8 +19,13 @@ clone-repo:
         echo "Repository already exists."
     fi
     ln -sfn ../microservices-demo investigation/microservices-demo
+    ln -sfn ../kustomize investigation/kustomize
 
-install: clone-repo
+# Destroy GKE Autopilot cluster & Online Boutique via embedded Terraform
+destroy:
+    cd terraform && terraform destroy -var="gcp_project_id=${GOOGLE_CLOUD_PROJECT}"
+
+install: deploy
 
 # Enter or display the spoiler-free investigation/ Root Cage folder
 investigate:

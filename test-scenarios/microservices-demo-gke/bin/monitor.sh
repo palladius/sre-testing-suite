@@ -16,7 +16,7 @@ GCLOUD_EMAIL=$(gcloud config get-value account 2>/dev/null)
 CLUSTER_NAME=$(kubectl config view --minify -o jsonpath='{.contexts[0].context.cluster}' 2>/dev/null | cut -d'_' -f4)
 CLUSTER_NAME=${CLUSTER_NAME:-"online-boutique-prod"}
 TARGET_IP=$(kubectl get service frontend-external -o jsonpath='{.status.loadBalancer.ingress[0].ip}' 2>/dev/null)
-TARGET_IP=${TARGET_IP:-"34.55.56.97"}
+TARGET_IP=${TARGET_IP:-"127.0.0.1:8080"}
 
 echo -e "${WHITE}================================================${RESET}"
 echo -e "${CYAN}   🚨 GKE Brokenness Scenario Monitor 🚨${RESET}"

@@ -1,13 +1,6 @@
 #!/bin/bash
-./../breakage_log_line.sh "scenario1-PROD standard" "Blackhole traffic to cart checkout. This is for standard gke cluster."
-
-# 1. Ensure the Online Boutique Repository is Cloned in the consistent parent directory
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-PARENT_REPO_DIR="$SCRIPT_DIR/../../microservices-demo"
-if [ ! -d "$PARENT_REPO_DIR" ]; then
-    echo "Cloning the Online Boutique repository via root justfile..."
-    (cd "$SCRIPT_DIR/../.." && just clone-repo)
-fi
+"$SCRIPT_DIR/../breakage_log_line.sh" "scenario1-PROD standard" "Blackhole traffic to cart checkout. This is for standard gke cluster."
 
  
 # 2. Create the "Black Hole" NetworkPolicy
