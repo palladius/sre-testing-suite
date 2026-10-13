@@ -90,9 +90,19 @@ just monitor
 
 ---
 
-## Next Steps: Testing the SRE Extension
+## Next Steps: Testing the SRE Extension (Inside the `investigation/` Root Cage!)
 
-Once a breakage scenario is active, you can use the investigation prompts to evaluate how the SRE Gemini extension helps detect, troubleshoot, and fix the issues.
+Once a breakage scenario is active, **always start your AI agent (`agy` or `gemini`) inside the dedicated [`./investigation/`](./investigation/) directory**:
 
-👉 See [Investigation Prompts Guide](./investigation-prompts/README.md) for full instructions and prompt templates.
+```bash
+cd investigation
+agy   # or: gemini
+```
+
+Why `investigation/`?
+- ✅ **Full Visibility into `./microservices-demo/`**: Via `investigation/microservices-demo`, both you and the AI agent can inspect the canonical Kubernetes manifests (`kubernetes-manifests/`), microservice source code (`src/`), and architecture diagram (`docs/img/architecture-diagram.png`).
+- 🔒 **Zero Visibility into `../breakage-scenarios/`**: The chaos scripts (`break.sh`, `fix.sh`) are outside the `investigation/` subtree, and [`investigation/GEMINI.md`](./investigation/GEMINI.md) instructs the agent not to exit `investigation/` without explicit user permission.
+- 📝 **Starter Postmortem Template (`investigation/postmortem.md`)**: Ready to be overwritten by the `postmortem-generator` and `monitoring-graphs` skills (replacing the `<!-- substitute this with the real postmortem -->` sentinel marker).
+
+👉 See [Investigation War Room Guide](./investigation/README.md) and [Investigation Prompts Guide](./investigation-prompts/README.md) for full instructions and prompt templates.
 

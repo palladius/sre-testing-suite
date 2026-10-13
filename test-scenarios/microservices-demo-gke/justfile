@@ -14,8 +14,14 @@ clone-repo:
     else
         echo "Repository already exists."
     fi
+    ln -sfn ../microservices-demo investigation/microservices-demo
 
 install: clone-repo
+
+# Enter or display the spoiler-free investigation/ Root Cage folder
+investigate:
+    @echo "🕵️‍♂️ Start your AI agent (agy / gemini) inside the spoiler-free Root Cage:"
+    @echo "  cd $(pwd)/investigation && agy"
 
 clean:
     rm -rf microservices-demo/

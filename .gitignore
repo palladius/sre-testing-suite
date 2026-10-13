@@ -1,2 +1,4 @@
 .DS_Store
 **/microservices-demo/
+!test-scenarios/microservices-demo-gke/investigation/microservices-demo
+

@@ -18,6 +18,12 @@ sre-testing-suite/
         ├── justfile                    # Just runner to easily break, fix, and monitor
         ├── bin/                        # Relocated set up and monitor scripts
         │   └── monitor.sh              # Real-time brokenness monitor script
+        ├── investigation/              # 🕵️‍♂️ Spoiler-free Root Cage entrypoint for AI SRE agents
+        │   ├── GEMINI.md               # Didactic guardrail (allows ./microservices-demo, forbids ../)
+        │   ├── AGENTS.md               # Symlink to GEMINI.md for multi-harness compatibility
+        │   ├── README.md               # War Room guide & Qwiklabs dependency contract
+        │   ├── postmortem.md           # Starter Postmortem template with magic sentinel comment
+        │   └── microservices-demo      # Symlink to ../microservices-demo for full app visibility
         ├── investigation-prompts/      # Test prompts to evaluate the SRE extension
         │   ├── README.md               # Details on using investigation prompts
         │   ├── 00-setup.md             # Initial MCP servers setup instructions
