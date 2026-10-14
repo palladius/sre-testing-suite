@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.5] - 2026-10-14 (Riccardo)
+
+### Fixed
+- Replaced `test-scenarios/microservices-demo-gke/investigation/AGENTS.md` symlink (`-> GEMINI.md`) with a regular file (`100644`) to prevent circular symlink loops (`ELOOP: Too many levels of symbolic links`) when Qwiklabs `startup.sh` populates `AGENTS.md` and `GEMINI.md`.
+
+---
+
 ## [0.0.3] - 2026-05-28 (Gemini)
 
 ### Changed
