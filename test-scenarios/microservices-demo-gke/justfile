@@ -32,6 +32,26 @@ investigate:
     @echo "🕵️‍♂️ Start your AI agent (agy / gemini) inside the spoiler-free Root Cage:"
     @echo "  cd $(pwd)/investigation && agy"
 
+# Verify zero circular/broken symlinks and zero symlinks on .md/.sh/.rb files, plus bash syntax check
+test:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "🔍 [1/3] Checking for forbidden symlinks on .md/.sh/.rb files..."
+    BAD_FILE_LINKS=$(find . -type l \( -name "*.md" -o -name "*.sh" -o -name "*.rb" \))
+    if [ -n "$BAD_FILE_LINKS" ]; then
+      echo "❌ ERROR: File symlinks are forbidden (causes ELOOP in startup scripts): $BAD_FILE_LINKS"
+      exit 1
+    fi
+    echo "🔍 [2/3] Checking for circular or broken symlinks (find -xtype l)..."
+    BROKEN_LINKS=$(find . -xtype l -not -name "microservices-demo")
+    if [ -n "$BROKEN_LINKS" ]; then
+      echo "❌ ERROR: Circular or broken symlinks detected: $BROKEN_LINKS"
+      exit 1
+    fi
+    echo "🔍 [3/3] Checking bash syntax on all .sh scripts..."
+    find . -name "*.sh" -exec bash -n {} +
+    echo "✅ All symlink and syntax checks passed!"
+
 clean:
     rm -rf microservices-demo/
     rm -rf breakage-scenarios/breakage1-checkout/microservices-demo/

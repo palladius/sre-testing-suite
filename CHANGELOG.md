@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.6] - 2026-10-14 (Riccardo)
+
+### Added
+- Added `just test` symlink & syntax safety check (`justfile` and `test-scenarios/microservices-demo-gke/justfile`) that forbids symlinks on `.md`/`.sh`/`.rb` files, scans for circular or broken symlinks (`find . -xtype l`), and validates all `.sh` scripts with `bash -n`.
+
+---
+
 ## [0.0.5] - 2026-10-14 (Riccardo)
 
 ### Fixed
